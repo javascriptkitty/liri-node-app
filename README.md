@@ -6,15 +6,15 @@ LIRI stands for Language Interpretation and Recognition Interface. It's a comman
 
 liri.js can take in one of the following commands:
 
-- concert-this &#60;artist/band name&#60;
+- concert-this &#60;artist/band name&#62;
   This will search the Bands in Town Artist Events API for an artist and render information about each event.
   ![Site screenshort](https://github.com/javascriptkitty/liri-node-app/blob/master/images/concert.gif)
 
-- spotify-this-song &#60;song name&#60;
+- spotify-this-song &#60;song name&#62;
   This will show information about a song.
   ![Site screenshort](https://github.com/javascriptkitty/liri-node-app/blob/master/images/spotify.gif)
 
-- movie-this &#60;movie name&#60;
+- movie-this &#60;movie name&#62;
   This will search the OMDB API for an movie and render information about a movie.
   ![Site screenshort](https://github.com/javascriptkitty/liri-node-app/blob/master/images/movie.gif)
 
