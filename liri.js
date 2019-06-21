@@ -12,35 +12,34 @@ if (action == "do-what-it-says") {
   for (var i = 0; i < result.length; i++) {
     action = result[i][0];
     input = result[i][1];
-    switch (action) {
-      case "concert-this":
-        displayConsert();
-        break;
-      case "spotify-this-song":
-        displaySong();
-        break;
-      case "movie-this":
-        displayMovie();
-        break;
-    }
+
+    runAction();
   }
+} else {
+  runAction();
 }
 
-switch (action) {
-  case "concert-this":
-    displayConsert();
-    break;
-  case "spotify-this-song":
-    displaySong();
-    break;
-  case "movie-this":
-    displayMovie();
-    break;
+function runAction() {
+  switch (action) {
+    case "concert-this":
+      displayConsert();
+      break;
+    case "spotify-this-song":
+      displaySong();
+      break;
+    case "movie-this":
+      displayMovie();
+      break;
+  }
 }
 
 function print(msg) {
   console.log(msg);
-  // TODO: log to file
+  fs.appendFile("log.txt", msg + "\n", function(err) {
+    if (err) {
+      console.log(err);
+    }
+  });
 }
 
 function displayConsert() {
@@ -92,7 +91,7 @@ function displaySong() {
       return print("Error occurred: " + err);
     }
 
-    print(JSON.stringify(data.tracks.items, null, "\t"));
+    //print(JSON.stringify(data.tracks.items, null, "\t"));
 
     for (var i = 0; i < data.tracks.items.length; i++) {
       var result = data.tracks.items[i];
@@ -130,7 +129,7 @@ function displayMovie() {
       print("actors: " + result.Actors);
     })
     .catch(function(error) {
-      logError(error);
+      console.log(error);
     });
 }
 
@@ -140,7 +139,7 @@ function readInputFromFile() {
   var dataArrays = data.split("\n");
   var inputArr = [];
   for (var i = 0; i < dataArrays.length; i++) {
-    var dataArr = dataArrays[0].split(",");
+    var dataArr = dataArrays[i].split(",");
     var action = dataArr[0];
     var input = dataArr[1];
     var input = input.substring(1, input.length - 1);
