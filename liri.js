@@ -51,8 +51,10 @@ function displayConsert() {
         "/events?app_id=codingbootcamp"
     )
     .then(function(response) {
-      //print(response);
       var result = response.data;
+      if (result.length == 0) {
+        console.log(input + " doesn't have shows now");
+      }
       for (var i = 0; i < result.length; i++) {
         var date = moment(result[i].datetime, "YYYY-MM-DDTHH:mm:ss");
         var dateFormated = date.format("MM/DD/YYYY");
@@ -85,7 +87,10 @@ function logError(error) {
 function displaySong() {
   var Spotify = require("node-spotify-api");
   var spotify = new Spotify(keys.spotify);
-  input.replace(" ", "%20");
+  if (input == null) {
+    input = "the sign";
+  }
+
   spotify.search({ type: "track", query: input }, function(err, data) {
     if (err) {
       return print("Error occurred: " + err);
@@ -113,6 +118,9 @@ function displayMovie() {
       "http://www.omdbapi.com/?t=" + input + "&y=&plot=short&apikey=trilogy";
   } else {
     url = "http://www.omdbapi.com/?t=Mr.+Nobody&y=&plot=short&apikey=trilogy";
+    print("If you haven't watched 'Mr. Nobody,' then you should:");
+    print("http://www.imdb.com/title/tt0485947/");
+    print("It's on Netflix!");
   }
 
   axios
